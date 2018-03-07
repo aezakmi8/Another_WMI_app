@@ -1,0 +1,11 @@
+C:\Users\Администратор.000\Documents\GitHub\Another_WMI_app\Another_WMI_app\obj\Debug\Another_WMI_app.csprojResolveAssemblyReference.cache
+C:\Users\Администратор.000\Documents\GitHub\Another_WMI_app\Another_WMI_app\obj\Debug\Another_WMI_app.Properties.Resources.resources
+C:\Users\Администратор.000\Documents\GitHub\Another_WMI_app\Another_WMI_app\obj\Debug\Another_WMI_app.csproj.GenerateResource.Cache
+C:\Users\Администратор.000\Documents\GitHub\Another_WMI_app\Another_WMI_app\obj\Debug\Another_WMI_app.csproj.CoreCompileInputs.cache
+C:\Users\Администратор.000\Documents\GitHub\Another_WMI_app\Another_WMI_app\bin\Debug\Another_WMI_app.exe.config
+C:\Users\Администратор.000\Documents\GitHub\Another_WMI_app\Another_WMI_app\bin\Debug\Another_WMI_app.exe
+C:\Users\Администратор.000\Documents\GitHub\Another_WMI_app\Another_WMI_app\bin\Debug\Another_WMI_app.pdb
+C:\Users\Администратор.000\Documents\GitHub\Another_WMI_app\Another_WMI_app\bin\Debug\System.Management.dll
+C:\Users\Администратор.000\Documents\GitHub\Another_WMI_app\Another_WMI_app\obj\Debug\Another_WMI_app.exe
+C:\Users\Администратор.000\Documents\GitHub\Another_WMI_app\Another_WMI_app\obj\Debug\Another_WMI_app.pdb
+C:\Users\Администратор.000\Documents\GitHub\Another_WMI_app\Another_WMI_app\obj\Debug\Another_WMI_app.Form1.resources
