@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿using System;
-=======
 using System;
->>>>>>> 4c8ec1882f945bddb77179d25775f4350b5df812
 using System.Windows;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -46,11 +42,8 @@ namespace Another_WMI_app
                     string className = wmiClass.Path.ClassName;
                     HardTreeinfo.Nodes.Add(className);
                     //Get_WMI_Class(wmiClass.Path.ClassName, count);
-<<<<<<< HEAD
-=======
                     //HardTreeinfo.Nodes[count].Nodes.Add(ListToNodeItem(GetWMIClass(wmiClass.Path.ClassName, count)));
                     //HardTreeinfo.Nodes[count].Nodes.AddRange(ListToNodeItem(GetWMIClass(wmiClass.Path.ClassName, count)));\ working
->>>>>>> 4c8ec1882f945bddb77179d25775f4350b5df812
                     TreeNode obj = HardTreeinfo.Nodes[count];
                     Professional(GetWMIClass(wmiClass.Path.ClassName, count), ref obj);
                     // classList.Items.Add(wmiClass.Path.ClassName.Trim());  //первые 74
@@ -114,11 +107,7 @@ namespace Another_WMI_app
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM " + Win32_Process);
             foreach (ManagementObject obj in searcher.Get())
             {
-<<<<<<< HEAD
-                obj[list[i]].ToString().Trim();
-=======
                 obj[list[i]].ToString().Trim()
->>>>>>> 4c8ec1882f945bddb77179d25775f4350b5df812
                 }
             return list;
         }
@@ -164,16 +153,6 @@ namespace Another_WMI_app
             }
         }
 
-<<<<<<< HEAD
-        //private void WMIClassesItem_Selected(object sender, RoutedEventArgs e)
-        //{
-        //    System.Windows.Forms.TreeView item = (System.Windows.Forms.TreeView)sender;
-        //    if (item.Nodes.Count == 0)
-        //    {
-        //        ConstructWMIClassTree(item);
-        //    }
-        //}
-=======
         private void WMIClassesItem_Selected(object sender, RoutedEventArgs e)
         {
             System.Windows.Forms.TreeView item = (System.Windows.Forms.TreeView)sender;
@@ -182,7 +161,6 @@ namespace Another_WMI_app
                 ConstructWMIClassTree(item);
             }
         }
->>>>>>> 4c8ec1882f945bddb77179d25775f4350b5df812
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -210,4 +188,3 @@ namespace Another_WMI_app
         }
     }
 }
-
