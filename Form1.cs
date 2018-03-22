@@ -42,8 +42,6 @@ namespace Another_WMI_app
                     string className = wmiClass.Path.ClassName;
                     HardTreeinfo.Nodes.Add(className);
                     //Get_WMI_Class(wmiClass.Path.ClassName, count);
-                    //HardTreeinfo.Nodes[count].Nodes.Add(ListToNodeItem(GetWMIClass(wmiClass.Path.ClassName, count)));
-                    //HardTreeinfo.Nodes[count].Nodes.AddRange(ListToNodeItem(GetWMIClass(wmiClass.Path.ClassName, count)));\ working
                     TreeNode obj = HardTreeinfo.Nodes[count];
                     Professional(GetWMIClass(wmiClass.Path.ClassName, count), ref obj);
                     // classList.Items.Add(wmiClass.Path.ClassName.Trim());  //первые 74
@@ -153,14 +151,14 @@ namespace Another_WMI_app
             }
         }
 
-        private void WMIClassesItem_Selected(object sender, RoutedEventArgs e)
-        {
-            System.Windows.Forms.TreeView item = (System.Windows.Forms.TreeView)sender;
-            if (item.Nodes.Count == 0)
-            {
-                ConstructWMIClassTree(item);
-            }
-        }
+        //private void WMIClassesItem_Selected(object sender, RoutedEventArgs e)
+        //{
+        //    System.Windows.Forms.TreeView item = (System.Windows.Forms.TreeView)sender;
+        //    if (item.Nodes.Count == 0)
+        //    {
+        //        ConstructWMIClassTree(item);
+        //    }
+        //}
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
