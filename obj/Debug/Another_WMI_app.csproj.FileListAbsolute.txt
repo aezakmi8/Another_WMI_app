@@ -9,15 +9,3 @@ C:\Users\Администратор.000\Documents\GitHub\Another_WMI_app\Another
 C:\Users\Администратор.000\Documents\GitHub\Another_WMI_app\Another_WMI_app\obj\Debug\Another_WMI_app.exe
 C:\Users\Администратор.000\Documents\GitHub\Another_WMI_app\Another_WMI_app\obj\Debug\Another_WMI_app.pdb
 C:\Users\Администратор.000\Documents\GitHub\Another_WMI_app\Another_WMI_app\obj\Debug\Another_WMI_app.Form1.resources
-C:\Users\aezakmi8-PC\Source\Repos\Another_WMI_app\bin\Debug\Another_WMI_app.exe.config
-C:\Users\aezakmi8-PC\Source\Repos\Another_WMI_app\bin\Debug\Another_WMI_app.exe
-C:\Users\aezakmi8-PC\Source\Repos\Another_WMI_app\bin\Debug\Another_WMI_app.pdb
-C:\Users\aezakmi8-PC\Source\Repos\Another_WMI_app\bin\Debug\System.Management.dll
-C:\Users\aezakmi8-PC\Source\Repos\Another_WMI_app\obj\Debug\Another_WMI_app.csprojResolveAssemblyReference.cache
-C:\Users\aezakmi8-PC\Source\Repos\Another_WMI_app\obj\Debug\Another_WMI_app.Form1.resources
-C:\Users\aezakmi8-PC\Source\Repos\Another_WMI_app\obj\Debug\Another_WMI_app.Properties.Resources.resources
-C:\Users\aezakmi8-PC\Source\Repos\Another_WMI_app\obj\Debug\Another_WMI_app.csproj.GenerateResource.Cache
-C:\Users\aezakmi8-PC\Source\Repos\Another_WMI_app\obj\Debug\Another_WMI_app.csproj.CoreCompileInputs.cache
-C:\Users\aezakmi8-PC\Source\Repos\Another_WMI_app\obj\Debug\Another_WMI_app.exe
-C:\Users\aezakmi8-PC\Source\Repos\Another_WMI_app\obj\Debug\Another_WMI_app.pdb
-C:\Users\aezakmi8-PC\source\repos\Another_WMI_app\bin\Debug\PresentationFramework.dll
