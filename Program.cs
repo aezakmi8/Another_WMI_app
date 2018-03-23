@@ -33,7 +33,7 @@ namespace Another_WMI_app
 
             ConnectionOptions options = new ConnectionOptions();
             options.Username = null;
-            options.Password = "uXe2LmVV";
+            options.Password = "";
             options.EnablePrivileges = true;
             // Make a connection to a remote computer.
             // Replace the "FullComputerName" section of the
