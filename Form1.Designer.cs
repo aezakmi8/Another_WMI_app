@@ -52,24 +52,27 @@
             // 
             // HardTreeinfo
             // 
+            this.HardTreeinfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.HardTreeinfo.BackColor = System.Drawing.SystemColors.InfoText;
             this.HardTreeinfo.ForeColor = System.Drawing.Color.Lime;
             this.HardTreeinfo.Location = new System.Drawing.Point(127, 13);
             this.HardTreeinfo.Name = "HardTreeinfo";
-            this.HardTreeinfo.Size = new System.Drawing.Size(310, 308);
+            this.HardTreeinfo.Size = new System.Drawing.Size(416, 308);
             this.HardTreeinfo.TabIndex = 1;
             // 
             // classList
             // 
-            this.classList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.classList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.classList.BackColor = System.Drawing.SystemColors.InfoText;
             this.classList.ForeColor = System.Drawing.Color.Lime;
             this.classList.FormattingEnabled = true;
             this.classList.ItemHeight = 16;
-            this.classList.Location = new System.Drawing.Point(443, 12);
+            this.classList.Location = new System.Drawing.Point(549, 12);
             this.classList.Name = "classList";
-            this.classList.Size = new System.Drawing.Size(291, 308);
+            this.classList.Size = new System.Drawing.Size(192, 308);
             this.classList.TabIndex = 5;
             // 
             // button2
@@ -94,8 +97,7 @@
             // 
             // LogBox
             // 
-            this.LogBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.LogBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.LogBox.BackColor = System.Drawing.SystemColors.MenuText;
             this.LogBox.ForeColor = System.Drawing.Color.Lime;
@@ -109,6 +111,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(618, 335);

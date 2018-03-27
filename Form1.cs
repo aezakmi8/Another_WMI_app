@@ -1,5 +1,4 @@
 using System;
-using System.Windows;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,36 +25,25 @@ namespace Another_WMI_app
 
         private void AddClassesToList()
         {
-            this.LogBox.Text = "Searching...";
+            LogBox.Items.Add("Searching...");
             try
             {
-                //List<string> HardType = new List<string> { "Win32_Processor", "Win32_VideoController" };
-                WqlObjectQuery query = new WqlObjectQuery("SELECT * FROM meta_class WHERE __class LIKE 'Win32_%' ");
-                ManagementObjectSearcher searcher = new ManagementObjectSearcher(query);
+                List<string> HardType = new List<string> { "Win32_Processor", "Win32_VideoController", "Win32_CDROMDrive", "Win32_DiskDrive" };
                 int count = 0;
-                foreach (ManagementObject wmiClass in searcher.Get())
+                foreach (string className in HardType)
                 {
-                    if (count == 74)
-                    {
-                        break;
-                    }
-                    string className = wmiClass.Path.ClassName;
-                    HardTreeinfo.Nodes.Add(className);
-                    //Get_WMI_Class(wmiClass.Path.ClassName, count);
-                    //HardTreeinfo.Nodes[count].Nodes.Add(ListToNodeItem(GetWMIClass(wmiClass.Path.ClassName, count)));
-                    //HardTreeinfo.Nodes[count].Nodes.AddRange(ListToNodeItem(GetWMIClass(wmiClass.Path.ClassName, count)));\ working
-                    TreeNode obj = HardTreeinfo.Nodes[count];
-                    Professional(GetWMIClass(wmiClass.Path.ClassName, count), ref obj);
-                    // classList.Items.Add(wmiClass.Path.ClassName.Trim());  //первые 74
-                    count++;
+                        HardTreeinfo.Nodes.Add(className);
+                        TreeNode obj = HardTreeinfo.Nodes[count];
+                        Professional(AddPropertiesToList(className), ref obj);
+                        count++;
                 }
+                HardTreeinfo.ExpandAll();
                 LogBox.Items.Add(count + " classes found.");
             }
             catch (Exception ex)
             {
                 LogBox.Items.Add(ex.Message);
             }
-
         }
 
         public void Professional(List<string> list, ref TreeNode node)
@@ -66,62 +54,213 @@ namespace Another_WMI_app
             }
         }
 
-
-        private List<string> GetWMIClass(string Win32_Process, int count)
+        public List<string> AddPropertiesToList(string Win32_Process)
         {
             List<string> result = new List<string>();
-            // Get the WMI class
-            ManagementClass processClass =
-                new ManagementClass(Win32_Process);
-            processClass.Options.UseAmendedQualifiers = true;
-            // Get the properties in the class
-            PropertyDataCollection properties =
-                processClass.Properties;
-            // display the properties
+            int propertyCount = 0;
+            LogBox.Text = "Searching...";
             try
             {
-                    foreach (PropertyData property in properties)
+                // Gets the property qualifiers.
+                ObjectGetOptions op = new ObjectGetOptions(null, System.TimeSpan.MaxValue, true);
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM " + Win32_Process);
+                ManagementClass mc = new ManagementClass("root\\CIMV2", Win32_Process, op);
+                mc.Options.UseAmendedQualifiers = true;
+                foreach (PropertyData dataObject in mc.Properties)
+                {
+                    foreach (ManagementObject wmiObject in searcher.Get())
                     {
-                        //LogBox.Items.Add(property.Name);    //Получаем имена полей из классов
-                        //HardTreeinfo.Nodes[count].Nodes.Add(property.Name);
-                        //result.Add(property.Name.Trim() + obj[property.Name.Trim()].ToString().Trim());
-                        result.Add(property.Name.Trim());
-                        //foreach (QualifierData q in property.Qualifiers)
+                        if (wmiObject.Properties[dataObject.Name].IsArray)
+                        {
+                            // Do nothing.
+                        }
+                        else
+                       // Property is not an array.
+                       if (wmiObject.Properties[dataObject.Name].Type.ToString().Equals(null))
+                        {
+
+                        }
+                        else
+                       if (wmiObject.Properties[dataObject.Name].Type.ToString().Equals("String"))
+                        {
+                            result.Add(dataObject.Name + " = " +  wmiObject.GetPropertyValue(dataObject.Name).ToString().Trim());
+                        }
+                        propertyCount++;
+                        //if (dataObject.Properties[property.ToString()].Type.ToString().Equals("String"))
+                        //foreach (QualifierData q in property.Qualifiers) //Получаем описание
                         //{
-                        //    if (q.Name.Equals("Description")) //Получаем описание
+                        //    if (q.Name.Equals("Description"))
                         //    {
                         //        LogBox.Items.Add((string)processClass.GetPropertyQualifierValue(property.Name, q.Name));
                         //    }
-                        //}
                     }
+                }
             }
             catch (Exception ex)
             {
-                LogBox.Text = ex.Message;
+                LogBox.Items.Add(ex.Message);
             }
+            LogBox.Items.Add(propertyCount + " prop found.");
             return result;
         }
 
-        private List <string> GetNodeItems (List<string> list)
+        private void myMethod()
         {
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM " + Win32_Process);
-            foreach (ManagementObject obj in searcher.Get())
+            int propertyCount = 0;
+            try
             {
-                obj[list[i]].ToString().Trim()
+                ObjectGetOptions op = new ObjectGetOptions(null, System.TimeSpan.MaxValue, true);
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM " + "Win32_VideoController");
+                ManagementClass mc = new ManagementClass("root\\CIMV2", "Win32_VideoController", op);
+                mc.Options.UseAmendedQualifiers = true;
+
+                foreach (PropertyData dataObject in mc.Properties)
+                {
+                    foreach (ManagementObject wmiObject in searcher.Get())
+                    {
+                        if (wmiObject.Properties[dataObject.Name].IsArray)
+                        {
+                            // Do nothing.
+                        }
+                        else
+                        // Property is not an array.
+                        if (wmiObject.Properties[dataObject.Name].Type.ToString().Equals(null))
+                        {
+                            // property is not a string.
+                            // Do nothing.
+                            //LogBox.Items.Add(wmiObject.GetPropertyValue(dataObject.Name).ToString());
+                        }
+                        else
+                        //
+                        if (wmiObject.Properties[dataObject.Name].Type.ToString().Equals("String"))
+                        {
+                            LogBox.Items.Add(wmiObject.GetPropertyValue(dataObject.Name).ToString() + "*");
+                        }
+                        propertyCount++;
+                        //if (dataObject.Properties[property.ToString()].Type.ToString().Equals("String"))
+                        //foreach (QualifierData q in property.Qualifiers) //Получаем описание
+                        //{
+                        //    if (q.Name.Equals("Description")) 
+                        //    {
+                        //        LogBox.Items.Add((string)processClass.GetPropertyQualifierValue(property.Name, q.Name));
+                        //    }
+                    }
                 }
-            return list;
+                LogBox.Items.Add(propertyCount);
+            }
+            catch (Exception ex)
+            {
+                LogBox.Items.Add(ex.Message);
+            }
         }
 
-        private static object ClassItemField(ManagementObject ClassItem)
-        {
+        //private List<string> AddValuesToList(string Win32_Process)
+        //{
+        //    List<string> result = new List<string>();
+        //    int valueCount = 0;
+        //    LogBox.Text = "Searching...";
+        //    try
+        //    {
+        //        // Performs WMI object query on the
+        //        // selected class.
+        //        string query = "select * from " + Win32_Process;
+        //        ManagementObjectSearcher searcher =
+        //            new ManagementObjectSearcher(query);
+        //       //     new ManagementScope(NamespaceValue.Text), new WqlObjectQuery(query), null);
+        //        foreach (ManagementObject wmiObject in
+        //            searcher.Get())
+        //        {
+        //            foreach (object property in this.Property.SelectedItems)
+        //            {
+        //                if (wmiObject.Properties[property.ToString()].IsArray)
+        //                {
+        //                    // Do nothing.
+        //                }
+        //                else
+        //                {
+        //                    // Set buffer string used to separate instances in the list.
+        //                    if (instanceCounter)
+        //                    {
+        //                        buffer = "";
+        //                    }
+        //                    else
+        //                    {
+        //                        buffer = "          ";
+        //                    }
 
-            return ClassItem;
-        }
+        //                    // Property is not an array.
+        //                    if (wmiObject.Properties[property.ToString()].Type.ToString().Equals("String"))
+        //                    {
+        //                        // Property is a string.
+        //                        this.ValueList.Items.Add(buffer + property.ToString() + " = '" +
+        //                            wmiObject.GetPropertyValue(
+        //                            property.ToString()) + "'");
+
+        //                        valueCount++;
+        //                    }
+        //                    else
+        //                    {
+        //                        // Property is not a string.
+        //                        this.ValueList.Items.Add(buffer + property.ToString() + " = " +
+        //                            wmiObject.GetPropertyValue(
+        //                            property.ToString()));
+        //                        valueCount++;
+        //                    }
+        //                }
+        //            }
+
+        //            if (instanceCounter)
+        //            {
+        //                instanceCounter = false;
+        //            }
+        //            else
+        //            {
+        //                instanceCounter = true;
+        //            }
+        //        }
+        //        this.ValueStatus.Text =
+        //            valueCount + " values found. Properties with an array data type are not listed (can't be used in a query).";
+        //    }
+        //    catch (ManagementException ex)
+        //    {
+        //        this.ValueStatus.Text = ex.Message;
+        //    }
+        //}
 
         private void button1_Click(object sender, EventArgs e)
         {
             //RemoteConnect.WMI_Conn();
             AddClassesToList();
+        }
+
+        private void GetAllWMIClasses()
+        {
+            {
+                LogBox.Items.Add("Searching...");
+                try
+                {
+                    WqlObjectQuery query = new WqlObjectQuery("SELECT * FROM meta_class WHERE __class LIKE 'Win32_%' ");
+                    ManagementObjectSearcher searcher = new ManagementObjectSearcher(query);
+                    int count = 0;
+                        foreach (ManagementObject wmiClass in searcher.Get())
+                        {
+                            if (count == 5)
+                            {
+                                break;
+                            }
+                            string className = wmiClass.Path.ClassName;
+                            HardTreeinfo.Nodes.Add(className);
+                            TreeNode obj = HardTreeinfo.Nodes[count];
+                            Professional(AddPropertiesToList(className), ref obj); //первые 5
+                            count++;
+                        }
+                    LogBox.Items.Add(count + " classes found.");
+                }
+                catch (Exception ex)
+                {
+                    LogBox.Items.Add(ex.Message);
+                }
+            }
         }
 
         private void ConstructWMIClassTree(System.Windows.Forms.TreeView item)
@@ -153,15 +292,6 @@ namespace Another_WMI_app
             }
         }
 
-        private void WMIClassesItem_Selected(object sender, RoutedEventArgs e)
-        {
-            System.Windows.Forms.TreeView item = (System.Windows.Forms.TreeView)sender;
-            if (item.Nodes.Count == 0)
-            {
-                ConstructWMIClassTree(item);
-            }
-        }
-
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -179,7 +309,7 @@ namespace Another_WMI_app
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            myMethod();
         }
 
         private void LogBox_SelectedIndexChanged(object sender, EventArgs e)
