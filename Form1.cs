@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Management;
 using System.Management.Instrumentation;
+using System.Diagnostics;
 
 
 
@@ -21,6 +22,8 @@ namespace Another_WMI_app
         public Form1()
         {
             InitializeComponent();
+            tableLayoutPanel1.ColumnCount = 4;
+
         }
 
         private void AddClassesToList()
@@ -57,12 +60,13 @@ namespace Another_WMI_app
         public List<string> AddPropertiesToList(string Win32_Process)
         {
             List<string> result = new List<string>();
+            int someshitCounter = 0;
             int propertyCount = 0;
             LogBox.Text = "Searching...";
             try
             {
-                // Gets the property qualifiers.
-                ObjectGetOptions op = new ObjectGetOptions(null, System.TimeSpan.MaxValue, true);
+                // Gets the propertys.
+                ObjectGetOptions op = new ObjectGetOptions(null, new TimeSpan(1), true);
                 ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM " + Win32_Process);
                 ManagementClass mc = new ManagementClass("root\\CIMV2", Win32_Process, op);
                 mc.Options.UseAmendedQualifiers = true;
@@ -74,17 +78,19 @@ namespace Another_WMI_app
                         {
                             // Do nothing.
                         }
-                        else
-                       // Property is not an array.
-                       if (wmiObject.Properties[dataObject.Name].Type.ToString().Equals(null))
+                        // Property is not an array.
+                        else if (wmiObject.Properties[dataObject.Name].Type.ToString().Equals(null))
                         {
-
+                            // property is null.
+                            // Do nothing.
                         }
-                        else
-                       if (wmiObject.Properties[dataObject.Name].Type.ToString().Equals("String"))
+                        else if (wmiObject.Properties[dataObject.Name].Type.ToString().Equals("String"))
                         {
                             result.Add(dataObject.Name + " = " +  wmiObject.GetPropertyValue(dataObject.Name).ToString().Trim());
                         }
+                        //shithappend
+                        else someshitCounter++;
+
                         propertyCount++;
                         //if (dataObject.Properties[property.ToString()].Type.ToString().Equals("String"))
                         //foreach (QualifierData q in property.Qualifiers) //Получаем описание
@@ -100,6 +106,7 @@ namespace Another_WMI_app
             {
                 LogBox.Items.Add(ex.Message);
             }
+            LogBox.Items.Add(someshitCounter + " shit happends.");
             LogBox.Items.Add(propertyCount + " prop found.");
             return result;
         }
@@ -107,13 +114,13 @@ namespace Another_WMI_app
         private void myMethod()
         {
             int propertyCount = 0;
+            int someshitCounter = 0;
             try
             {
                 ObjectGetOptions op = new ObjectGetOptions(null, System.TimeSpan.MaxValue, true);
                 ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM " + "Win32_VideoController");
                 ManagementClass mc = new ManagementClass("root\\CIMV2", "Win32_VideoController", op);
                 mc.Options.UseAmendedQualifiers = true;
-
                 foreach (PropertyData dataObject in mc.Properties)
                 {
                     foreach (ManagementObject wmiObject in searcher.Get())
@@ -122,20 +129,19 @@ namespace Another_WMI_app
                         {
                             // Do nothing.
                         }
-                        else
                         // Property is not an array.
-                        if (wmiObject.Properties[dataObject.Name].Type.ToString().Equals(null))
+                        else if (wmiObject.Properties[dataObject.Name].Type.ToString().Equals(null))
                         {
-                            // property is not a string.
+                            // property is null.
                             // Do nothing.
-                            //LogBox.Items.Add(wmiObject.GetPropertyValue(dataObject.Name).ToString());
                         }
-                        else
-                        //
-                        if (wmiObject.Properties[dataObject.Name].Type.ToString().Equals("String"))
+                        else if (wmiObject.Properties[dataObject.Name].Type.ToString().Equals("String"))
                         {
-                            LogBox.Items.Add(wmiObject.GetPropertyValue(dataObject.Name).ToString() + "*");
+                            LogBox.Items.Add(dataObject.Name + " = " + wmiObject.GetPropertyValue(dataObject.Name).ToString());
                         }
+                        //shithappend
+                        else someshitCounter++;
+
                         propertyCount++;
                         //if (dataObject.Properties[property.ToString()].Type.ToString().Equals("String"))
                         //foreach (QualifierData q in property.Qualifiers) //Получаем описание
@@ -153,79 +159,6 @@ namespace Another_WMI_app
                 LogBox.Items.Add(ex.Message);
             }
         }
-
-        //private List<string> AddValuesToList(string Win32_Process)
-        //{
-        //    List<string> result = new List<string>();
-        //    int valueCount = 0;
-        //    LogBox.Text = "Searching...";
-        //    try
-        //    {
-        //        // Performs WMI object query on the
-        //        // selected class.
-        //        string query = "select * from " + Win32_Process;
-        //        ManagementObjectSearcher searcher =
-        //            new ManagementObjectSearcher(query);
-        //       //     new ManagementScope(NamespaceValue.Text), new WqlObjectQuery(query), null);
-        //        foreach (ManagementObject wmiObject in
-        //            searcher.Get())
-        //        {
-        //            foreach (object property in this.Property.SelectedItems)
-        //            {
-        //                if (wmiObject.Properties[property.ToString()].IsArray)
-        //                {
-        //                    // Do nothing.
-        //                }
-        //                else
-        //                {
-        //                    // Set buffer string used to separate instances in the list.
-        //                    if (instanceCounter)
-        //                    {
-        //                        buffer = "";
-        //                    }
-        //                    else
-        //                    {
-        //                        buffer = "          ";
-        //                    }
-
-        //                    // Property is not an array.
-        //                    if (wmiObject.Properties[property.ToString()].Type.ToString().Equals("String"))
-        //                    {
-        //                        // Property is a string.
-        //                        this.ValueList.Items.Add(buffer + property.ToString() + " = '" +
-        //                            wmiObject.GetPropertyValue(
-        //                            property.ToString()) + "'");
-
-        //                        valueCount++;
-        //                    }
-        //                    else
-        //                    {
-        //                        // Property is not a string.
-        //                        this.ValueList.Items.Add(buffer + property.ToString() + " = " +
-        //                            wmiObject.GetPropertyValue(
-        //                            property.ToString()));
-        //                        valueCount++;
-        //                    }
-        //                }
-        //            }
-
-        //            if (instanceCounter)
-        //            {
-        //                instanceCounter = false;
-        //            }
-        //            else
-        //            {
-        //                instanceCounter = true;
-        //            }
-        //        }
-        //        this.ValueStatus.Text =
-        //            valueCount + " values found. Properties with an array data type are not listed (can't be used in a query).";
-        //    }
-        //    catch (ManagementException ex)
-        //    {
-        //        this.ValueStatus.Text = ex.Message;
-        //    }
-        //}
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -292,16 +225,6 @@ namespace Another_WMI_app
             }
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             AddClassesToList();
@@ -312,9 +235,25 @@ namespace Another_WMI_app
             myMethod();
         }
 
-        private void LogBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void classList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            Process[] processes = Process.GetProcesses();
+            foreach (Process p in Process.GetProcesses("."))
         }
     }
 }
