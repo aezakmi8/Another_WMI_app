@@ -12,6 +12,7 @@ using System.Windows.Documents;
 using System.Management;
 using System.Management.Instrumentation;
 using System.Diagnostics;
+using System.Threading;
 
 
 
@@ -22,8 +23,6 @@ namespace Another_WMI_app
         public Form1()
         {
             InitializeComponent();
-            tableLayoutPanel1.ColumnCount = 4;
-
         }
 
         private void AddClassesToList()
@@ -235,25 +234,24 @@ namespace Another_WMI_app
             myMethod();
         }
 
-        private void classList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click_1(object sender, EventArgs e)
         {
-
+            dataGridView1.DataSource = FilldtSourse.dtSource;
+            //run thred
+            Thread t1 = new Thread(FilldtSourse.GetProcess);
+            t1.IsBackground = true;
+            t1.Start();
+            label1.Text = t1.IsAlive + "";
+            if (!t1.IsAlive)
+            {
+                t1.Start();
+            }
         }
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        private void button1_Click_2(object sender, EventArgs e)
         {
-
-        }
-
-        private void tabControl1_Selected(object sender, TabControlEventArgs e)
-        {
-            Process[] processes = Process.GetProcesses();
-            foreach (Process p in Process.GetProcesses("."))
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = FilldtSourse.dtSource;
         }
     }
 }

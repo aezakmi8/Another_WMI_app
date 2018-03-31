@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.HardInfo_btn = new System.Windows.Forms.Button();
             this.HardTreeinfo = new System.Windows.Forms.TreeView();
             this.classList = new System.Windows.Forms.ListBox();
@@ -39,12 +38,16 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.HardInfo = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.ProcKill_btn = new System.Windows.Forms.Button();
+            this.UpdtGrid_Btn = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.FilldtGrid_btn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.HardInfo.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // HardInfo_btn
@@ -67,7 +70,7 @@
             this.HardTreeinfo.ForeColor = System.Drawing.Color.Lime;
             this.HardTreeinfo.Location = new System.Drawing.Point(123, 28);
             this.HardTreeinfo.Name = "HardTreeinfo";
-            this.HardTreeinfo.Size = new System.Drawing.Size(448, 370);
+            this.HardTreeinfo.Size = new System.Drawing.Size(448, 367);
             this.HardTreeinfo.TabIndex = 1;
             // 
             // classList
@@ -80,9 +83,8 @@
             this.classList.ItemHeight = 16;
             this.classList.Location = new System.Drawing.Point(577, 28);
             this.classList.Name = "classList";
-            this.classList.Size = new System.Drawing.Size(192, 356);
+            this.classList.Size = new System.Drawing.Size(192, 340);
             this.classList.TabIndex = 5;
-            this.classList.SelectedIndexChanged += new System.EventHandler(this.classList_SelectedIndexChanged);
             // 
             // button2
             // 
@@ -112,7 +114,7 @@
             this.LogBox.ForeColor = System.Drawing.Color.Lime;
             this.LogBox.FormattingEnabled = true;
             this.LogBox.ItemHeight = 16;
-            this.LogBox.Location = new System.Drawing.Point(123, 407);
+            this.LogBox.Location = new System.Drawing.Point(123, 404);
             this.LogBox.Name = "LogBox";
             this.LogBox.Size = new System.Drawing.Size(517, 116);
             this.LogBox.TabIndex = 8;
@@ -121,8 +123,8 @@
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(646, 407);
+            this.pictureBox1.InitialImage = global::Another_WMI_app.Properties.Resources.Anonymous_PNG_Pic;
+            this.pictureBox1.Location = new System.Drawing.Point(646, 404);
             this.pictureBox1.MaximumSize = new System.Drawing.Size(128, 128);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(116, 116);
@@ -137,12 +139,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.HardInfo);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Location = new System.Drawing.Point(0, -1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(788, 559);
+            this.tabControl1.Size = new System.Drawing.Size(788, 556);
             this.tabControl1.TabIndex = 0;
-            this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             // 
             // HardInfo
             // 
@@ -155,55 +156,85 @@
             this.HardInfo.Controls.Add(this.HardTreeinfo);
             this.HardInfo.Location = new System.Drawing.Point(4, 25);
             this.HardInfo.Name = "HardInfo";
-            this.HardInfo.Size = new System.Drawing.Size(780, 530);
+            this.HardInfo.Size = new System.Drawing.Size(780, 527);
             this.HardInfo.TabIndex = 0;
             this.HardInfo.Text = "HardInfo";
             this.HardInfo.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.UpdtGrid_Btn);
+            this.tabPage2.Controls.Add(this.label1);
+            this.tabPage2.Controls.Add(this.dataGridView1);
             this.tabPage2.Controls.Add(this.tableLayoutPanel1);
-            this.tabPage2.Controls.Add(this.ProcKill_btn);
+            this.tabPage2.Controls.Add(this.FilldtGrid_btn);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(780, 530);
+            this.tabPage2.Size = new System.Drawing.Size(780, 527);
             this.tabPage2.TabIndex = 0;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // ProcKill_btn
+            // UpdtGrid_Btn
             // 
-            this.ProcKill_btn.Location = new System.Drawing.Point(670, 3);
-            this.ProcKill_btn.Name = "ProcKill_btn";
-            this.ProcKill_btn.Size = new System.Drawing.Size(107, 43);
-            this.ProcKill_btn.TabIndex = 1;
-            this.ProcKill_btn.Text = "button1";
-            this.ProcKill_btn.UseVisualStyleBackColor = true;
-            this.ProcKill_btn.Click += new System.EventHandler(this.button1_Click_1);
+            this.UpdtGrid_Btn.Location = new System.Drawing.Point(670, 58);
+            this.UpdtGrid_Btn.Name = "UpdtGrid_Btn";
+            this.UpdtGrid_Btn.Size = new System.Drawing.Size(107, 43);
+            this.UpdtGrid_Btn.TabIndex = 11;
+            this.UpdtGrid_Btn.Text = "UpdatedtGrid";
+            this.UpdtGrid_Btn.UseVisualStyleBackColor = true;
+            this.UpdtGrid_Btn.Click += new System.EventHandler(this.button1_Click_2);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(670, 112);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 17);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "label1";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlText;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
+            this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.dataGridView1.Location = new System.Drawing.Point(8, 9);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.ShowCellErrors = false;
+            this.dataGridView1.Size = new System.Drawing.Size(656, 509);
+            this.dataGridView1.TabIndex = 3;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.AutoSize = true;
-            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(8, 3);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(40, 0);
-            this.tableLayoutPanel1.TabIndex = 2;
-            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 100);
+            this.tableLayoutPanel1.TabIndex = 12;
+            // 
+            // FilldtGrid_btn
+            // 
+            this.FilldtGrid_btn.Location = new System.Drawing.Point(670, 9);
+            this.FilldtGrid_btn.Name = "FilldtGrid_btn";
+            this.FilldtGrid_btn.Size = new System.Drawing.Size(107, 43);
+            this.FilldtGrid_btn.TabIndex = 1;
+            this.FilldtGrid_btn.Text = "FilldtGrid";
+            this.FilldtGrid_btn.UseVisualStyleBackColor = true;
+            this.FilldtGrid_btn.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(786, 555);
+            this.ClientSize = new System.Drawing.Size(786, 551);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
@@ -213,6 +244,7 @@
             this.HardInfo.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -229,8 +261,11 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage HardInfo;
-        private System.Windows.Forms.Button ProcKill_btn;
+        private System.Windows.Forms.Button FilldtGrid_btn;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button UpdtGrid_Btn;
     }
 }
 
