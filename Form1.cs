@@ -25,7 +25,28 @@ namespace Another_WMI_app
             InitializeComponent();
         }
 
-        private void AddClassesToList()
+        private async void Form1_Load(object sender, EventArgs e)
+        {
+            await ApplydtSourse();
+            await Task.Run(FilldtSourse.Users);
+            await Task.Run(FilldtSourse.InstalldApps);
+            //UsersList.Items.AddRange(AppFilldtSourse.UsersList.ToArray());
+        }
+
+        private async Task ApplydtSourse()
+        {
+            //HardTab
+            HardGrid.DataSource = null;
+            HardGrid.DataSource = FilldtSourse.UsersdtSource;
+            //ProcTab
+            ProcGrid.DataSource = null;
+            ProcGrid.DataSource = FilldtSourse.ProcdtSource;
+            //AppTab
+            InstalldAppsGrid.DataSource = null;
+            InstalldAppsGrid.DataSource = FilldtSourse.InsAppsdtSource;
+        }
+
+        private async Task AddClassesToList()
         {
             LogBox.Items.Add("Searching...");
             try
@@ -34,10 +55,13 @@ namespace Another_WMI_app
                 int count = 0;
                 foreach (string className in HardType)
                 {
-                        HardTreeinfo.Nodes.Add(className);
-                        TreeNode obj = HardTreeinfo.Nodes[count];
-                        Professional(AddPropertiesToList(className), ref obj);
-                        count++;
+                    var prop = AddPropertiesToList(className);
+                    var node = await TreeNodeAddRange(prop, className);
+                    ///HardTreeinfo.Nodes.Add(className);
+                    //TreeNode obj = HardTreeinfo.Nodes[count];
+                    HardTreeinfo.Nodes.Add(node);
+                    //Professional(AddPropertiesToList(className), ref obj);
+                    count++;
                 }
                 HardTreeinfo.ExpandAll();
                 LogBox.Items.Add(count + " classes found.");
@@ -48,12 +72,15 @@ namespace Another_WMI_app
             }
         }
 
-        public void Professional(List<string> list, ref TreeNode node)
+        public async Task<TreeNode> TreeNodeAddRange(List<string> list, string className)
         {
-            foreach (var i in list)
-            {
-                node.Nodes.Add(i);
-            }
+                //TreeNode[] tree = new TreeNode[] { new TreeNode(i)};
+                TreeNode tree = new TreeNode(className);
+                foreach (var i in list)
+                {
+                    tree.Nodes.Add(i);
+                }
+                return tree;
         }
 
         public List<string> AddPropertiesToList(string Win32_Process)
@@ -85,11 +112,10 @@ namespace Another_WMI_app
                         }
                         else if (wmiObject.Properties[dataObject.Name].Type.ToString().Equals("String"))
                         {
-                            result.Add(dataObject.Name + " = " +  wmiObject.GetPropertyValue(dataObject.Name).ToString().Trim());
+                            result.Add(dataObject.Name + " = " + wmiObject.GetPropertyValue(dataObject.Name).ToString().Trim());
                         }
                         //shithappend
                         else someshitCounter++;
-
                         propertyCount++;
                         //if (dataObject.Properties[property.ToString()].Type.ToString().Equals("String"))
                         //foreach (QualifierData q in property.Qualifiers) //Получаем описание
@@ -159,10 +185,10 @@ namespace Another_WMI_app
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             //RemoteConnect.WMI_Conn();
-            AddClassesToList();
+            await AddClassesToList();
         }
 
         private void GetAllWMIClasses()
@@ -174,18 +200,18 @@ namespace Another_WMI_app
                     WqlObjectQuery query = new WqlObjectQuery("SELECT * FROM meta_class WHERE __class LIKE 'Win32_%' ");
                     ManagementObjectSearcher searcher = new ManagementObjectSearcher(query);
                     int count = 0;
-                        foreach (ManagementObject wmiClass in searcher.Get())
+                    foreach (ManagementObject wmiClass in searcher.Get())
+                    {
+                        if (count == 5)
                         {
-                            if (count == 5)
-                            {
-                                break;
-                            }
-                            string className = wmiClass.Path.ClassName;
-                            HardTreeinfo.Nodes.Add(className);
-                            TreeNode obj = HardTreeinfo.Nodes[count];
-                            Professional(AddPropertiesToList(className), ref obj); //первые 5
-                            count++;
+                            break;
                         }
+                        string className = wmiClass.Path.ClassName;
+                        HardTreeinfo.Nodes.Add(className);
+                        TreeNode obj = HardTreeinfo.Nodes[count];
+                        //Professional(AddPropertiesToList(className), ref obj); //первые 5
+                        count++;
+                    }
                     LogBox.Items.Add(count + " classes found.");
                 }
                 catch (Exception ex)
@@ -195,63 +221,33 @@ namespace Another_WMI_app
             }
         }
 
-        private void ConstructWMIClassTree(System.Windows.Forms.TreeView item)
+        private async void KillProc_Btn_Click(object sender, EventArgs e)
         {
-            ManagementScope mgmtScope = new ManagementScope("root/cimv2");
-            ManagementPath mgmtPath = new ManagementPath("__NAMESPACE");
-            using (ManagementClass mgmtClass = new ManagementClass(mgmtScope, mgmtPath, null))
+            try
             {
-                foreach (ManagementObject mgmtObject in mgmtClass.GetInstances())
+                int rowindex = ProcGrid.CurrentCell.RowIndex;
+                String CellValue = ProcGrid.Rows[rowindex].Cells[1].Value.ToString();
+                foreach (DataGridViewRow row in ProcGrid.SelectedRows)
                 {
-                    string name = (string)mgmtObject.Properties["Name"].Value;
-                    LogBox.Items.Add((string)name);
-                    if (!string.IsNullOrEmpty(name))
-                    {
-                        System.Windows.Forms.TreeView newTreeViewItem = new System.Windows.Forms.TreeView();
-                        newTreeViewItem.Name = name;
-                        LogBox.Items.Add((string)item.Tag);
-                        StringBuilder sb = new StringBuilder(mgmtClass.Path.ToString());
-                        sb.Replace(mgmtClass.Path.ClassName, string.Empty);
-                        sb.Replace(":", string.Empty);
-                        sb.Append(@"\");
-                        sb.Append(name);
-                        newTreeViewItem.Tag = sb.ToString();
-                        //newTreeViewItem.AfterSelect += new RoutedEventHandler(WMIClassesItem_Selected);
-                        LogBox.Items.Add(newTreeViewItem.Name);
-                    }
-
+                    ProcGrid.Rows[row.Index + 1].Selected = true;
+                    ProcGrid.Rows.Remove(row);
                 }
+                await FilldtSourse.KillById(Convert.ToInt32(CellValue));
             }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            AddClassesToList();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            myMethod();
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            dataGridView1.DataSource = FilldtSourse.dtSource;
-            //run thred
-            Thread t1 = new Thread(FilldtSourse.GetProcess);
-            t1.IsBackground = true;
-            t1.Start();
-            label1.Text = t1.IsAlive + "";
-            if (!t1.IsAlive)
+            catch (Exception ex)
             {
-                t1.Start();
+                MessageBox.Show(ex.Message);
             }
         }
 
-        private void button1_Click_2(object sender, EventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = null;
-            dataGridView1.DataSource = FilldtSourse.dtSource;
+
+        }
+
+        private void HardGrid_DoubleClick(object sender, EventArgs e)
+        {
+            ApplydtSourse();
         }
     }
 }
