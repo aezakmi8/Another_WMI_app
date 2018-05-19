@@ -13,7 +13,7 @@ using System.IO;
 
 namespace Another_WMI_app
 {
-    class FilldtSourse : Form
+    class FilldtSourse1 : Form
     {
         public static DataTable ProcdtSource = new DataTable();
         public static DataTable InsAppsdtSource = new DataTable();
@@ -181,7 +181,7 @@ namespace Another_WMI_app
         }
 
         //-----------------------------UsersTab-----------------------------
-        public static async Task Users()
+        public static void Users()
         {
             if (!usersFilled) //если таблица не была создана
             {
@@ -199,7 +199,7 @@ namespace Another_WMI_app
         }
 
         //-----------------------------SerializeShit--------------------------
-        static byte[] GetBinaryFormatDTable(DataTable dt)
+        static byte[] GetBinaryFormatData(DataTable dt)
         {
             BinaryFormatter bFormat = new BinaryFormatter();
             byte[] outList = null;
@@ -212,7 +212,7 @@ namespace Another_WMI_app
             return outList;
         }
 
-        static DataTable GetDTable(byte[] dtData)
+        static DataTable GetDataTable(byte[] dtData)
         {
             DataTable dt = null;
             BinaryFormatter bFormat = new BinaryFormatter();
@@ -222,28 +222,5 @@ namespace Another_WMI_app
             }
             return dt;
         }
-
-        static byte[] GetBinaryFormatList(List<string> list)
-        {
-            BinaryFormatter bFormat = new BinaryFormatter();
-            byte[] outList = null;
-            using (MemoryStream ms = new MemoryStream())
-            {
-                bFormat.Serialize(ms, list);
-                outList = ms.ToArray();
-            }
-            return outList;
-        }
-        static List<string> GetList(byte[] listData)
-        {
-            List<string> list = null;
-            BinaryFormatter bFormat = new BinaryFormatter();
-            using (MemoryStream ms = new MemoryStream(listData))
-            {
-                list = (List<string>)bFormat.Deserialize(ms);
-            }
-            return list;
-        }
-
     }
 }

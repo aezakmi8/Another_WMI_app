@@ -20,6 +20,14 @@ namespace Another_WMI_app
 {
     public partial class Form1 : Form
     {
+        [STAThread]
+        static public void Main() //main
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Form1());
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -27,13 +35,14 @@ namespace Another_WMI_app
 
         private async void Form1_Load(object sender, EventArgs e)
         {
-            await ApplydtSourse();
             await Task.Run(FilldtSourse.Users);
             await Task.Run(FilldtSourse.InstalldApps);
+            await Task.Run(FilldtSourse.Proc);
+            ApplydtSourse();
             //UsersList.Items.AddRange(AppFilldtSourse.UsersList.ToArray());
         }
 
-        private async Task ApplydtSourse()
+        private void ApplydtSourse()
         {
             //HardTab
             HardGrid.DataSource = null;
@@ -46,97 +55,7 @@ namespace Another_WMI_app
             InstalldAppsGrid.DataSource = FilldtSourse.InsAppsdtSource;
         }
 
-        private async Task AddClassesToList()
-        {
-            LogBox.Items.Add("Searching...");
-            try
-            {
-                List<string> HardType = new List<string> { "Win32_Processor", "Win32_VideoController", "Win32_CDROMDrive", "Win32_DiskDrive" };
-                int count = 0;
-                foreach (string className in HardType)
-                {
-                    var prop = AddPropertiesToList(className);
-                    var node = await TreeNodeAddRange(prop, className);
-                    ///HardTreeinfo.Nodes.Add(className);
-                    //TreeNode obj = HardTreeinfo.Nodes[count];
-                    HardTreeinfo.Nodes.Add(node);
-                    //Professional(AddPropertiesToList(className), ref obj);
-                    count++;
-                }
-                HardTreeinfo.ExpandAll();
-                LogBox.Items.Add(count + " classes found.");
-            }
-            catch (Exception ex)
-            {
-                LogBox.Items.Add(ex.Message);
-            }
-        }
-
-        public async Task<TreeNode> TreeNodeAddRange(List<string> list, string className)
-        {
-                //TreeNode[] tree = new TreeNode[] { new TreeNode(i)};
-                TreeNode tree = new TreeNode(className);
-                foreach (var i in list)
-                {
-                    tree.Nodes.Add(i);
-                }
-                return tree;
-        }
-
-        public List<string> AddPropertiesToList(string Win32_Process)
-        {
-            List<string> result = new List<string>();
-            int someshitCounter = 0;
-            int propertyCount = 0;
-            LogBox.Text = "Searching...";
-            try
-            {
-                // Gets the propertys.
-                ObjectGetOptions op = new ObjectGetOptions(null, new TimeSpan(1), true);
-                ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM " + Win32_Process);
-                ManagementClass mc = new ManagementClass("root\\CIMV2", Win32_Process, op);
-                mc.Options.UseAmendedQualifiers = true;
-                foreach (PropertyData dataObject in mc.Properties)
-                {
-                    foreach (ManagementObject wmiObject in searcher.Get())
-                    {
-                        if (wmiObject.Properties[dataObject.Name].IsArray)
-                        {
-                            // Do nothing.
-                        }
-                        // Property is not an array.
-                        else if (wmiObject.Properties[dataObject.Name].Type.ToString().Equals(null))
-                        {
-                            // property is null.
-                            // Do nothing.
-                        }
-                        else if (wmiObject.Properties[dataObject.Name].Type.ToString().Equals("String"))
-                        {
-                            result.Add(dataObject.Name + " = " + wmiObject.GetPropertyValue(dataObject.Name).ToString().Trim());
-                        }
-                        //shithappend
-                        else someshitCounter++;
-                        propertyCount++;
-                        //if (dataObject.Properties[property.ToString()].Type.ToString().Equals("String"))
-                        //foreach (QualifierData q in property.Qualifiers) //Получаем описание
-                        //{
-                        //    if (q.Name.Equals("Description"))
-                        //    {
-                        //        LogBox.Items.Add((string)processClass.GetPropertyQualifierValue(property.Name, q.Name));
-                        //    }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                LogBox.Items.Add(ex.Message);
-            }
-            LogBox.Items.Add(someshitCounter + " shit happends.");
-            LogBox.Items.Add(propertyCount + " prop found.");
-            return result;
-        }
-
-        private void myMethod()
+        private void myMethod() //not used
         {
             int propertyCount = 0;
             int someshitCounter = 0;
@@ -185,13 +104,7 @@ namespace Another_WMI_app
             }
         }
 
-        private async void button1_Click(object sender, EventArgs e)
-        {
-            //RemoteConnect.WMI_Conn();
-            await AddClassesToList();
-        }
-
-        private void GetAllWMIClasses()
+        private void GetAllWMIClasses() //not used
         {
             {
                 LogBox.Items.Add("Searching...");
@@ -232,7 +145,8 @@ namespace Another_WMI_app
                     ProcGrid.Rows[row.Index + 1].Selected = true;
                     ProcGrid.Rows.Remove(row);
                 }
-                await FilldtSourse.KillById(Convert.ToInt32(CellValue));
+                FilldtSourse filldt = new FilldtSourse();
+                filldt.KillById(Convert.ToInt32(CellValue));
             }
             catch (Exception ex)
             {
@@ -240,14 +154,65 @@ namespace Another_WMI_app
             }
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void HardGrid_DoubleClick(object sender, EventArgs e)
         {
             ApplydtSourse();
+        }
+ 
+        private void RunServ_Click(object sender, EventArgs e)
+        {
+            ServerObject server = new ServerObject(); // сервер
+            Thread listenThread; // поток для прослушивания
+            try
+            {
+                server = new ServerObject();
+                listenThread = new Thread(new ThreadStart(server.Listen));
+                listenThread.Start(); //старт потока
+            }
+            catch (Exception ex)
+            {
+                server.Disconnect();
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void test_Click(object sender, EventArgs e)
+        {
+            ClientObject.server.BroadcastMessage("daijobu", ClientObject.ip);
+        }
+
+        private async void HardInfo_btn_Click(object sender, EventArgs e)
+        {
+            List<string> hardType = new List<string> { "Win32_Processor", "Win32_VideoController", "Win32_CDROMDrive", "Win32_DiskDrive" };
+            //RemoteConnect.WMI_Conn();
+            Console.WriteLine("Searching...");
+            FilldtSourse filldt = new FilldtSourse();
+            try
+            {
+                int count = 0;
+                foreach (string className in hardType)
+                {
+                    HardTreeinfo.Nodes.Add(className);
+                    TreeNode obj = HardTreeinfo.Nodes[count];
+                    var prop = await filldt.AddPropToList(className);
+                    Professional(prop, ref obj);
+                    count++;
+                }
+                HardTreeinfo.ExpandAll();
+                Console.WriteLine(count + " classes found.");
+            }
+            catch (Exception ex)
+            {
+                LogBox.Items.Add(ex.Message);
+            }
+        }
+
+        public void Professional(List<string> list, ref TreeNode node)
+        {
+            foreach (var i in list)
+            {
+                node.Nodes.Add(i);
+            }
         }
     }
 }
