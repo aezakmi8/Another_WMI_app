@@ -20,3 +20,12 @@ C:\Users\aezakmi8-PC\source\repos\Another_WMI_app\obj\Debug\Another_WMI_app.cspr
 C:\Users\aezakmi8-PC\source\repos\Another_WMI_app\obj\Debug\Another_WMI_app.exe
 C:\Users\aezakmi8-PC\source\repos\Another_WMI_app\obj\Debug\Another_WMI_app.pdb
 C:\Users\aezakmi8-PC\source\repos\Another_WMI_app\obj\Debug\Another_WMI_app.Form1.resources
+C:\Users\aezakmi8-PC\source\repos\Another_WMI_app\bin\Debug\EntityFramework.dll
+C:\Users\aezakmi8-PC\source\repos\Another_WMI_app\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\aezakmi8-PC\source\repos\Another_WMI_app\bin\Debug\System.Data.SQLite.dll
+C:\Users\aezakmi8-PC\source\repos\Another_WMI_app\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\aezakmi8-PC\source\repos\Another_WMI_app\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\aezakmi8-PC\source\repos\Another_WMI_app\bin\Debug\EntityFramework.xml
+C:\Users\aezakmi8-PC\source\repos\Another_WMI_app\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\aezakmi8-PC\source\repos\Another_WMI_app\bin\Debug\System.Data.SQLite.xml
+C:\Users\aezakmi8-PC\source\repos\Another_WMI_app\bin\Debug\System.Data.SQLite.dll.config

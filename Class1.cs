@@ -244,6 +244,5 @@ namespace Another_WMI_app
             }
             return list;
         }
-
     }
 }

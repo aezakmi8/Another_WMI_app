@@ -39,6 +39,7 @@ namespace Another_WMI_app
             await Task.Run(FilldtSourse.InstalldApps);
             await Task.Run(FilldtSourse.Proc);
             ApplydtSourse();
+
             //UsersList.Items.AddRange(AppFilldtSourse.UsersList.ToArray());
         }
 

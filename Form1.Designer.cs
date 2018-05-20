@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.HardInfo_btn = new System.Windows.Forms.Button();
             this.HardTreeinfo = new System.Windows.Forms.TreeView();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -45,10 +45,10 @@
             this.Apps_Tab = new System.Windows.Forms.TabPage();
             this.InstalldAppsGrid = new System.Windows.Forms.DataGridView();
             this.CommTab = new System.Windows.Forms.TabPage();
-            this.logShit = new System.Windows.Forms.ListBox();
-            this.ServState = new System.Windows.Forms.Label();
-            this.RunServ = new System.Windows.Forms.Button();
             this.test = new System.Windows.Forms.Button();
+            this.RunServ = new System.Windows.Forms.Button();
+            this.ServState = new System.Windows.Forms.Label();
+            this.logShit = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.HardInfo_Tab.SuspendLayout();
@@ -136,14 +136,14 @@
             this.HardGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.HardGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.HardGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle25.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle25.ForeColor = System.Drawing.Color.Lime;
-            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.HardGrid.DefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Lime;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.HardGrid.DefaultCellStyle = dataGridViewCellStyle6;
             this.HardGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.HardGrid.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.HardGrid.Location = new System.Drawing.Point(487, 28);
@@ -240,23 +240,23 @@
             this.InstalldAppsGrid.BackgroundColor = System.Drawing.SystemColors.ControlText;
             this.InstalldAppsGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.InstalldAppsGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle26.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle26.ForeColor = System.Drawing.Color.Lime;
-            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.InstalldAppsGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Lime;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.InstalldAppsGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.InstalldAppsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle27.BackColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle27.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle27.ForeColor = System.Drawing.Color.Lime;
-            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.InstalldAppsGrid.DefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Lime;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.InstalldAppsGrid.DefaultCellStyle = dataGridViewCellStyle5;
             this.InstalldAppsGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.InstalldAppsGrid.GridColor = System.Drawing.SystemColors.ControlText;
             this.InstalldAppsGrid.Location = new System.Drawing.Point(9, 11);
@@ -281,27 +281,16 @@
             this.CommTab.Text = "CommTab";
             this.CommTab.UseVisualStyleBackColor = true;
             // 
-            // logShit
+            // test
             // 
-            this.logShit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.logShit.BackColor = System.Drawing.SystemColors.InfoText;
-            this.logShit.ForeColor = System.Drawing.Color.Lime;
-            this.logShit.FormattingEnabled = true;
-            this.logShit.ItemHeight = 16;
-            this.logShit.Location = new System.Drawing.Point(564, 6);
-            this.logShit.Name = "logShit";
-            this.logShit.Size = new System.Drawing.Size(213, 516);
-            this.logShit.TabIndex = 11;
-            // 
-            // ServState
-            // 
-            this.ServState.AutoSize = true;
-            this.ServState.Location = new System.Drawing.Point(123, 22);
-            this.ServState.Name = "ServState";
-            this.ServState.Size = new System.Drawing.Size(46, 17);
-            this.ServState.TabIndex = 14;
-            this.ServState.Text = "label1";
+            this.test.Location = new System.Drawing.Point(9, 60);
+            this.test.Margin = new System.Windows.Forms.Padding(4);
+            this.test.Name = "test";
+            this.test.Size = new System.Drawing.Size(107, 43);
+            this.test.TabIndex = 17;
+            this.test.Text = "*test* - send, recieve";
+            this.test.UseVisualStyleBackColor = true;
+            this.test.Click += new System.EventHandler(this.test_Click);
             // 
             // RunServ
             // 
@@ -314,16 +303,27 @@
             this.RunServ.UseVisualStyleBackColor = true;
             this.RunServ.Click += new System.EventHandler(this.RunServ_Click);
             // 
-            // test
+            // ServState
             // 
-            this.test.Location = new System.Drawing.Point(9, 60);
-            this.test.Margin = new System.Windows.Forms.Padding(4);
-            this.test.Name = "test";
-            this.test.Size = new System.Drawing.Size(107, 43);
-            this.test.TabIndex = 17;
-            this.test.Text = "*test* - send, recieve";
-            this.test.UseVisualStyleBackColor = true;
-            this.test.Click += new System.EventHandler(this.test_Click);
+            this.ServState.AutoSize = true;
+            this.ServState.Location = new System.Drawing.Point(123, 22);
+            this.ServState.Name = "ServState";
+            this.ServState.Size = new System.Drawing.Size(46, 17);
+            this.ServState.TabIndex = 14;
+            this.ServState.Text = "label1";
+            // 
+            // logShit
+            // 
+            this.logShit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.logShit.BackColor = System.Drawing.SystemColors.InfoText;
+            this.logShit.ForeColor = System.Drawing.Color.Lime;
+            this.logShit.FormattingEnabled = true;
+            this.logShit.ItemHeight = 16;
+            this.logShit.Location = new System.Drawing.Point(564, 6);
+            this.logShit.Name = "logShit";
+            this.logShit.Size = new System.Drawing.Size(213, 516);
+            this.logShit.TabIndex = 11;
             // 
             // Form1
             // 
